@@ -1,18 +1,19 @@
-# train.py
+import pickle
 from sklearn.linear_model import LinearRegression
-from sklearn.datasets import load_diabetes
-import joblib
+from sklearn.datasets import make_regression
 
-# Load dataset
-data = load_diabetes()
-X, y = data.data, data.target
-print("Dataset loaded.")
 
-# Train model
-model = LinearRegression()
-model.fit(X, y)
-print("Model training complete.")
+def train_model():
+    X, y = make_regression(n_samples=100, n_features=1, noise=0.1, random_state=42)
+    model = LinearRegression()
+    model.fit(X, y)
+    with open("model.pkl", "wb") as f:
+        pickle.dump(model, f)
+    print("Model trained and saved as model.pkl")
+    return model
 
-# Save model
-joblib.dump(model, "model.pkl")
-print("Model training complete. Model saved as model.pkl.")
+
+if __name__ == "__main__":
+    train_model()
+
+# Add a newline here (W292 fix)

@@ -1,8 +1,10 @@
-# tests/test_train.py
 import os
+from train import train_model
 
-def test_model_file_exists():
-    assert os.path.exists("model.pkl"), "model.pkl does not exist"
-    print("model.pkl exists")
 
-test_model_file_exists()
+def test_model_training():
+    model = train_model()
+    assert model is not None
+    assert os.path.exists("model.pkl")
+
+# Add a newline here (W292 fix)
